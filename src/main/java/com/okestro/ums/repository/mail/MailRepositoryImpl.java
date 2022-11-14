@@ -1,5 +1,6 @@
 package com.okestro.ums.repository.mail;
 
+import com.okestro.ums.domain.Mail;
 import com.okestro.ums.domain.User;
 import com.okestro.ums.repository.user.UserRepositoryCustom;
 import lombok.RequiredArgsConstructor;
@@ -7,12 +8,12 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.EntityManager;
 
 @RequiredArgsConstructor
-public class MailRepositoryImpl implements UserRepositoryCustom {
+public class MailRepositoryImpl implements MailRepositoryCustom {
     private final EntityManager em;
 
     @Override
-    public User save(User user) {
-        em.persist(user);
-        return user;
+    public Mail save(Mail mail) {
+        em.persist(mail);
+        return mail;
     }
 }

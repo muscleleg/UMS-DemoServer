@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface HubRepository extends JpaRepository<Hub,Long>, HubRepositoryCustom {
-    List<User> findByUserName(String userName);
+//    List<Hub> findByUserName(String userName);
 }
