@@ -9,14 +9,12 @@ public class User {
     @Column(name="user_id")
     private Long id;
     private String userName;
-    private String userId;
 
     protected User() {
     }
 
-    public static User createUser(String userId, String userName) {
+    public static User createUser(String userName) {
         User user = new User();
-        user.userId = userId;
         user.userName = userName;
         return user;
     }

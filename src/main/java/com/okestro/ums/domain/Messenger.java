@@ -6,13 +6,13 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-public class Messenger {
+public class Messenger extends BaseEntity{
     @Id
     @GeneratedValue
     @Column(name="messenger_id")
     private Long id;
-    private String msg;
-    private String title;
+//    private String msg;
+//    private String title;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User user;
@@ -22,8 +22,8 @@ public class Messenger {
 
     public static Messenger createMessenger(String msg, String title, User user){
         Messenger messenger = new Messenger();
-        messenger.msg = msg;
-        messenger.title = title;
+        messenger.setMsg(msg);
+        messenger.setTitle(title);
         messenger.user = user;
         return messenger;
     }

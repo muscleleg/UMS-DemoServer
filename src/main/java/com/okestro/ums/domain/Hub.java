@@ -6,13 +6,13 @@ import javax.persistence.*;
 
 @Entity
 @Getter
-public class Hub {
+public class Hub extends BaseEntity{
     @Id
     @GeneratedValue
     @Column(name="hub_id")
     private Long id;
-    private String msg;
-    private String title;
+//    private String msg;
+//    private String title;
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     private User user;
@@ -22,8 +22,8 @@ public class Hub {
 
     public static Hub createHub(String msg, String title){
         Hub hub = new Hub();
-        hub.msg = msg;
-        hub.title = title;
+        hub.setMsg(msg);
+        hub.setTitle(title);
         return hub;
     }
 }
