@@ -28,7 +28,7 @@ public class ResponseDto {
         httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
         if (success) {
             responseDto.setSuccess(true);
-            responseDto.setCode(StatusEnum.UNDEFINED.getStatusCode());
+            responseDto.setCode(StatusEnum.OK.getStatusCode());
             responseDto.setMsg("성공하였습니다.");
             responseDto.setData(data);
             return new ResponseEntity<>(responseDto, httpHeaders, HttpStatus.OK);
