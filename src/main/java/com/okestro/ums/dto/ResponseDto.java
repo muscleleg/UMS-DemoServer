@@ -31,12 +31,14 @@ public class ResponseDto {
             responseDto.setCode(StatusEnum.UNDEFINED.getStatusCode());
             responseDto.setMsg("성공하였습니다.");
             responseDto.setData(data);
+            return new ResponseEntity<>(responseDto, httpHeaders, HttpStatus.OK);
         } else {
             responseDto.setSuccess(false);
             responseDto.setCode(StatusEnum.UNDEFINED.getStatusCode());
             responseDto.setMsg("실패하였습니다.");
+            return new ResponseEntity<>(responseDto, httpHeaders, HttpStatus.BAD_REQUEST);
         }
-        return new ResponseEntity<>(responseDto, httpHeaders, HttpStatus.OK);
+
 
     }
 }
