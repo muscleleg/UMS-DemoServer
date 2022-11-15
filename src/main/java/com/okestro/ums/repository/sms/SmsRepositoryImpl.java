@@ -10,9 +10,4 @@ import javax.persistence.EntityManager;
 public class SmsRepositoryImpl implements SmsRepositoryCustom {
     private final EntityManager em;
 
-    @Override
-    public Sms save(Sms sms) {
-        em.persist(sms);
-        return sms;
-    }
 }

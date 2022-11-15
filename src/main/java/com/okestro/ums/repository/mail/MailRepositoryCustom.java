@@ -4,6 +4,5 @@ import com.okestro.ums.domain.Hub;
 import com.okestro.ums.domain.Mail;
 
 public interface MailRepositoryCustom {
-    Mail save(Mail mail);
 
 }

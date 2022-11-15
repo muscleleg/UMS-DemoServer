@@ -8,5 +8,4 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface MessengerRepository extends JpaRepository<Messenger,Long>, UserRepositoryCustom {
-//    List<Messenger> findByUserName(String userName);
 }

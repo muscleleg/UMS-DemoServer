@@ -1,7 +1,10 @@
 package com.okestro.ums;
 
+import com.fasterxml.jackson.datatype.hibernate5.Hibernate5Module;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @SpringBootApplication
 public class UmsApplication {
@@ -10,4 +13,8 @@ public class UmsApplication {
 		SpringApplication.run(UmsApplication.class, args);
 	}
 
+	@Bean
+	Hibernate5Module hibernate5Module() {
+		return new Hibernate5Module();
+	}
 }

@@ -4,6 +4,5 @@ import com.okestro.ums.domain.Hub;
 import com.okestro.ums.domain.Sms;
 
 public interface SmsRepositoryCustom {
-    Sms save(Sms sms);
 
 }

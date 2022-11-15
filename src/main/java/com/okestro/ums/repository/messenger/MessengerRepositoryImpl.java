@@ -11,9 +11,5 @@ import javax.persistence.EntityManager;
 public class MessengerRepositoryImpl implements MessengerRepositoryCustom {
     private final EntityManager em;
 
-    @Override
-    public Messenger save(Messenger messenger) {
-        em.persist(messenger);
-        return messenger;
-    }
+
 }

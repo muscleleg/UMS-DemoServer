@@ -6,7 +6,7 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 @Setter
-public class BaseEntity {
+public abstract class BaseEntity {
     private String msg;
     private String title;
 }

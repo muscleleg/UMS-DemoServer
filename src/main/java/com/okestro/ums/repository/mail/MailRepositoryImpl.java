@@ -11,9 +11,5 @@ import javax.persistence.EntityManager;
 public class MailRepositoryImpl implements MailRepositoryCustom {
     private final EntityManager em;
 
-    @Override
-    public Mail save(Mail mail) {
-        em.persist(mail);
-        return mail;
-    }
+
 }

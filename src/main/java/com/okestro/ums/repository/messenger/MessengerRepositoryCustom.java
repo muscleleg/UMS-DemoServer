@@ -4,6 +4,5 @@ import com.okestro.ums.domain.Messenger;
 import com.okestro.ums.domain.User;
 
 public interface MessengerRepositoryCustom {
-    Messenger save(Messenger messenger);
 
 }

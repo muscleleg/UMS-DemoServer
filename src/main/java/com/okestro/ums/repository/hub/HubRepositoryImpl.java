@@ -9,9 +9,5 @@ import javax.persistence.EntityManager;
 public class HubRepositoryImpl implements HubRepositoryCustom{
     private final EntityManager em;
 
-    @Override
-    public Hub save(Hub hub) {
-        em.persist(hub);
-        return hub;
-    }
+
 }

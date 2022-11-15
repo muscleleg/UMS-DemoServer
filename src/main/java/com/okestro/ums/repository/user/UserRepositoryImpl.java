@@ -6,12 +6,6 @@ import lombok.RequiredArgsConstructor;
 import javax.persistence.EntityManager;
 
 @RequiredArgsConstructor
-public class UserRepositoryImpl implements UserRepositoryCustom{
+public class UserRepositoryImpl implements UserRepositoryCustom {
     private final EntityManager em;
-
-    @Override
-    public User save(User user) {
-        em.persist(user);
-        return user;
-    }
 }

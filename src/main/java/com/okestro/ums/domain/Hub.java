@@ -19,11 +19,14 @@ public class Hub extends BaseEntity{
 
     protected Hub() {
     }
+    protected Hub(String msg,String title,User user){
+        this.setMsg(msg);
+        this.setTitle(title);
+        this.user = user;
+    }
 
-    public static Hub createHub(String msg, String title){
-        Hub hub = new Hub();
-        hub.setMsg(msg);
-        hub.setTitle(title);
+    public static Hub createHub(String msg, String title,User user){
+        Hub hub = new Hub(msg,title,user);
         return hub;
     }
 }

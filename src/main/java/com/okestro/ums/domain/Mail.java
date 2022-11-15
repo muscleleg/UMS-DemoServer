@@ -25,6 +25,7 @@ public class Mail {
         Mail mail = new Mail();
         mail.address = address;
         mail.content = content;
+        mail.title = title;
         mail.user = user;
         return mail;
     }
