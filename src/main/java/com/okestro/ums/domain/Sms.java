@@ -9,21 +9,20 @@ public class Sms extends BaseEntity{
     @Column(name = "sms_id")
     private Long id;
     private String destPhoneNumber;
-//    private String msg;
-//    private String title;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id")
-    private User user;
+
+
 
     protected Sms() {
     }
-
-    public static Sms createSms(String destPhoneNumber, String msg, String title,User user){
-        Sms sms = new Sms();
-        sms.destPhoneNumber = destPhoneNumber;
-        sms.setMsg(msg);
-        sms.setTitle(title);
-        sms.user = user;
+    private Sms(String destPhoneNumber, String msg, String title,String userId,String userName){
+        this.destPhoneNumber = destPhoneNumber;
+        this.setMsg(msg);
+        this.setTitle(title);
+        this.setUserId(userId);
+        this.setUserName(userName);
+    }
+    public static Sms createSms(String destPhoneNumber, String msg, String title,String userId,String userName){
+        Sms sms = new Sms(destPhoneNumber,msg,title,userId,userName);
         return sms;
     }
 

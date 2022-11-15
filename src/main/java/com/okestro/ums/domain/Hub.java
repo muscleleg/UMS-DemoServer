@@ -11,22 +11,20 @@ public class Hub extends BaseEntity{
     @GeneratedValue
     @Column(name="hub_id")
     private Long id;
-//    private String msg;
-//    private String title;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id")
-    private User user;
+
+
 
     protected Hub() {
     }
-    protected Hub(String msg,String title,User user){
+    protected Hub(String msg,String title,String userId,String userName){
         this.setMsg(msg);
         this.setTitle(title);
-        this.user = user;
+        this.setUserId(userId);
+        this.setUserName(userName);
     }
 
-    public static Hub createHub(String msg, String title,User user){
-        Hub hub = new Hub(msg,title,user);
+    public static Hub createHub(String msg, String title,String userId, String userName){
+        Hub hub = new Hub(msg,title,userId,userName);
         return hub;
     }
 }

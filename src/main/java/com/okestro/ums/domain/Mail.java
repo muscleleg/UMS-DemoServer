@@ -14,19 +14,19 @@ public class Mail {
     private String address;
     private String content;
     private String title;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+
 
     protected Mail() {
     }
 
-    public static Mail createMail(String address, String content, String title, User user) {
-        Mail mail = new Mail();
-        mail.address = address;
-        mail.content = content;
-        mail.title = title;
-        mail.user = user;
+    private Mail(String address, String content, String title) {
+        this.address = address;
+        this.content = content;
+        this.title = title;
+    }
+
+    public static Mail createMail(String address, String content, String title) {
+        Mail mail = new Mail(address,content,title);
         return mail;
     }
 }

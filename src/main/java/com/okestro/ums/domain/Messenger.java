@@ -11,20 +11,21 @@ public class Messenger extends BaseEntity{
     @GeneratedValue
     @Column(name="messenger_id")
     private Long id;
-//    private String msg;
-//    private String title;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id")
-    private User user;
+
+
 
     protected Messenger() {
     }
+    private Messenger(String msg,String title, String userId,String userName){
+        this.setMsg(msg);
+        this.setTitle(title);
+        this.setUserId(userId);
+        this.setUserName(userName);
+    }
 
-    public static Messenger createMessenger(String msg, String title, User user){
-        Messenger messenger = new Messenger();
-        messenger.setMsg(msg);
-        messenger.setTitle(title);
-        messenger.user = user;
+
+    public static Messenger createMessenger(String msg,String title, String userId,String userName){
+        Messenger messenger = new Messenger(msg,title,userId,userName);
         return messenger;
     }
 }
