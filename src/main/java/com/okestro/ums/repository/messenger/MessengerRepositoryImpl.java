@@ -1,8 +1,5 @@
 package com.okestro.ums.repository.messenger;
 
-import com.okestro.ums.domain.Messenger;
-import com.okestro.ums.domain.User;
-import com.okestro.ums.repository.user.UserRepositoryCustom;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.EntityManager;

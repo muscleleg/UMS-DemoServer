@@ -11,14 +11,13 @@ public class Messenger extends BaseEntity{
     @GeneratedValue
     @Column(name="messenger_id")
     private Long id;
-
-
-
+    private String msg;
+    private String title;
     protected Messenger() {
     }
     private Messenger(String msg,String title, String userId,String userName){
-        this.setMsg(msg);
-        this.setTitle(title);
+        this.msg = msg;
+        this.title = title;
         this.setUserId(userId);
         this.setUserName(userName);
     }

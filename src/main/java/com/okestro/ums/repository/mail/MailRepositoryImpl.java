@@ -1,8 +1,5 @@
 package com.okestro.ums.repository.mail;
 
-import com.okestro.ums.domain.Mail;
-import com.okestro.ums.domain.User;
-import com.okestro.ums.repository.user.UserRepositoryCustom;
 import lombok.RequiredArgsConstructor;
 
 import javax.persistence.EntityManager;

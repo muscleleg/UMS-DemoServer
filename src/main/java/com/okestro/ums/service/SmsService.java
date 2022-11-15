@@ -1,7 +1,6 @@
 package com.okestro.ums.service;
 
 import com.okestro.ums.domain.Sms;
-import com.okestro.ums.domain.User;
 import com.okestro.ums.repository.sms.SmsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

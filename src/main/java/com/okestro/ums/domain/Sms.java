@@ -9,15 +9,14 @@ public class Sms extends BaseEntity{
     @Column(name = "sms_id")
     private Long id;
     private String destPhoneNumber;
-
-
-
+    private String msg;
+    private String title;
     protected Sms() {
     }
     private Sms(String destPhoneNumber, String msg, String title,String userId,String userName){
         this.destPhoneNumber = destPhoneNumber;
-        this.setMsg(msg);
-        this.setTitle(title);
+        this.msg = msg;
+        this.title = title;
         this.setUserId(userId);
         this.setUserName(userName);
     }
