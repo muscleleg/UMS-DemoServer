@@ -3,14 +3,22 @@ package com.okestro.ums.controller;
 import com.okestro.ums.domain.*;
 import com.okestro.ums.dto.*;
 import com.okestro.ums.service.*;
+import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 public class UmsController {
@@ -18,40 +26,85 @@ public class UmsController {
     private final MessengerService messengerService;
     private final MailService mailService;
     private final SmsService smsService;
+    //nested object쓸때 유용할듯!
+//    @Data
+//    static class HubDto {
+//        private String msg;
+//        private String title;
+//        @NotBlank
+//        private String userId;
+//        @NotBlank
+//        private String userName;
+//    }
     @PostMapping("/api/hub")
-    public ResponseEntity<ResponseDto> sendHub(@Valid HubDto hubDto, BindingResult bindingResult){
-        if(!bindingResult.hasErrors()){
-            Hub hub = Hub.createHub(hubDto.getMsg(), hubDto.getTitle(),hubDto.getUserId(),hubDto.getUserName());
+    public ResponseEntity<ResponseDto> sendHub(@RequestBody @Valid HubDto hubDto, BindingResult bindingResult, HttpServletRequest httpServletRequest){
+        ResponseEntity<ResponseDto> responseEntity = null;
+        if (bindingResult.hasFieldErrors()) {
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                log.info("URI : {}, {}의 {}는 {}", httpServletRequest.getRequestURI(),error.getObjectName(),error.getField(),error.getDefaultMessage());
+            }
+            ResponseDto responseDto = ResponseDto.createResponseEntity(false, hubDto);
+            responseEntity = responseEntity.badRequest().body(responseDto);
+        } else {
+            Hub hub = Hub.createHub(hubDto.getMsg(), hubDto.getTitle(), hubDto.getUserId(), hubDto.getUserName());
             hubService.saveHub(hub);
-            return ResponseDto.createResponseEntity(true,hubDto);
+            ResponseDto responseDto = ResponseDto.createResponseEntity(true, hubDto);
+            responseEntity = responseEntity.ok().body(responseDto);
         }
-        return ResponseDto.createResponseEntity(false,hubDto);
+        return responseEntity;
     }
+
     @PostMapping("/api/messenger")
-    public ResponseEntity<ResponseDto> sendMessenger(@Valid MessengerDto messengerDto, BindingResult bindingResult){
-        if(!bindingResult.hasErrors()){
+    public ResponseEntity<ResponseDto> sendMessenger(@RequestBody @Valid MessengerDto messengerDto, BindingResult bindingResult,HttpServletRequest httpServletRequest) {
+        ResponseEntity<ResponseDto> responseEntity = null;
+        if (bindingResult.hasErrors()) {
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                log.info("URI : {}, {}의 {}는 {}", httpServletRequest.getRequestURI(),error.getObjectName(),error.getField(),error.getDefaultMessage());
+            }
+            ResponseDto responseDto = ResponseDto.createResponseEntity(false, messengerDto);
+            responseEntity = responseEntity.badRequest().body(responseDto);
+        } else {
             Messenger messenger = Messenger.createMessenger(messengerDto.getMsg(), messengerDto.getTitle(), messengerDto.getUserId(), messengerDto.getUserName());
             messengerService.save(messenger);
-            return ResponseDto.createResponseEntity(true,messengerDto);
+            ResponseDto responseDto = ResponseDto.createResponseEntity(true, messengerDto);
+            responseEntity = responseEntity.ok().body(responseDto);
         }
-        return ResponseDto.createResponseEntity(false,messengerDto);
+        return responseEntity;
     }
+
     @PostMapping("/api/mail")
-    public ResponseEntity<ResponseDto> sendMail(@Valid MailDto mailDto, BindingResult bindingResult){
-        if(!bindingResult.hasErrors()){
-            Mail mail = Mail.createMail(mailDto.getAddress(), mailDto.getContents(), mailDto.getTitle(), mailDto.getUserId(),mailDto.getUserName());
+    public ResponseEntity<ResponseDto> sendMail(@RequestBody @Valid MailDto mailDto, BindingResult bindingResult,HttpServletRequest httpServletRequest) {
+        ResponseEntity<ResponseDto> responseEntity = null;
+        if (bindingResult.hasErrors()) {
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                log.info("URI : {}, {}의 {}는 {}", httpServletRequest.getRequestURI(),error.getObjectName(),error.getField(),error.getDefaultMessage());
+            }
+            ResponseDto responseDto = ResponseDto.createResponseEntity(false, mailDto);
+            responseEntity = responseEntity.badRequest().body(responseDto);
+        } else {
+            Mail mail = Mail.createMail(mailDto.getAddress(), mailDto.getContents(), mailDto.getTitle(), mailDto.getUserId(), mailDto.getUserName());
             mailService.save(mail);
-            return ResponseDto.createResponseEntity(true,mailDto);
+            ResponseDto responseDto = ResponseDto.createResponseEntity(true, mailDto);
+            responseEntity = responseEntity.ok().body(responseDto);
         }
-        return ResponseDto.createResponseEntity(false,mailDto);
+        return responseEntity;
     }
+
     @PostMapping("/api/sms")
-    public ResponseEntity<ResponseDto> sendMail(@Valid SmsDto smsDto, BindingResult bindingResult){
-        if(!bindingResult.hasErrors()){
-            Sms sms = Sms.createSms(smsDto.getDestPhoneNumber(),smsDto.getMsg(),smsDto.getTitle(),smsDto.getUserId(), smsDto.getUserName());
+    public ResponseEntity<ResponseDto> sendMail(@RequestBody @Valid SmsDto smsDto, BindingResult bindingResult,HttpServletRequest httpServletRequest) {
+        ResponseEntity<ResponseDto> responseEntity = null;
+        if (bindingResult.hasErrors()) {
+            for (FieldError error : bindingResult.getFieldErrors()) {
+                log.info("URI : {}, {}의 {}는 {}", httpServletRequest.getRequestURI(),error.getObjectName(),error.getField(),error.getDefaultMessage());
+            }
+            ResponseDto responseDto = ResponseDto.createResponseEntity(false, smsDto);
+            responseEntity = responseEntity.badRequest().body(responseDto);
+        } else {
+            Sms sms = Sms.createSms(smsDto.getDestPhoneNumber(), smsDto.getMsg(), smsDto.getTitle(), smsDto.getUserId(), smsDto.getUserName());
             smsService.save(sms);
-            return ResponseDto.createResponseEntity(true,smsDto);
+            ResponseDto responseDto = ResponseDto.createResponseEntity(true, sms);
+            responseEntity = responseEntity.ok().body(responseDto);
         }
-        return ResponseDto.createResponseEntity(false,smsDto);
+        return responseEntity;
     }
 }

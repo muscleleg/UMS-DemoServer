@@ -8,6 +8,4 @@ import javax.persistence.EntityManager;
 @RequiredArgsConstructor
 public class HubRepositoryImpl implements HubRepositoryCustom{
     private final EntityManager em;
-
-
 }

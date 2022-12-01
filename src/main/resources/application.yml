@@ -11,13 +11,19 @@ spring:
       hibernate:
         # show_sql: true
         format_sql: true
+    defer-datasource-initialization: true
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+  sql:
+    init:
+      mode: always
 logging.level:
   org.hibernate.SQL: debug
+  org.springframework: info
 server:
   servlet:
     session:
       tracking-modes: cookie
+
 

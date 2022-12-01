@@ -1,8 +1,14 @@
 package com.okestro.ums.domain;
 
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
+@Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Sms extends BaseEntity{
     @Id
     @GeneratedValue
@@ -11,15 +17,16 @@ public class Sms extends BaseEntity{
     private String destPhoneNumber;
     private String msg;
     private String title;
-    protected Sms() {
-    }
-    private Sms(String destPhoneNumber, String msg, String title,String userId,String userName){
+
+    protected Sms(String destPhoneNumber, String msg, String title,String userId,String userName){
+        super(userId,userName);
         this.destPhoneNumber = destPhoneNumber;
         this.msg = msg;
         this.title = title;
-        this.setUserId(userId);
-        this.setUserName(userName);
     }
+
+
+
     public static Sms createSms(String destPhoneNumber, String msg, String title,String userId,String userName){
         Sms sms = new Sms(destPhoneNumber,msg,title,userId,userName);
         return sms;

@@ -10,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 
 import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 @Data
 @AllArgsConstructor
@@ -22,22 +23,19 @@ public class ResponseDto {
     private Object data;
 
 
-    public static ResponseEntity createResponseEntity(boolean success, Object data) {
+    public static ResponseDto createResponseEntity(boolean success, Object data) {
         ResponseDto responseDto = new ResponseDto();
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setContentType(new MediaType("application", "json", Charset.forName("UTF-8")));
         if (success) {
             responseDto.setSuccess(true);
             responseDto.setCode(StatusEnum.OK.getStatusCode());
             responseDto.setMsg("성공하였습니다.");
             responseDto.setData(data);
-            return new ResponseEntity<>(responseDto, httpHeaders, HttpStatus.OK);
         } else {
             responseDto.setSuccess(false);
             responseDto.setCode(StatusEnum.UNDEFINED.getStatusCode());
             responseDto.setMsg("실패하였습니다.");
-            return new ResponseEntity<>(responseDto, httpHeaders, HttpStatus.BAD_REQUEST);
         }
+        return responseDto;
 
 
     }

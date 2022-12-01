@@ -1,11 +1,14 @@
 package com.okestro.ums.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Mail extends BaseEntity{
     @Id
     @GeneratedValue
@@ -14,15 +17,13 @@ public class Mail extends BaseEntity{
     private String address;
     private String content;
     private String title;
-    protected Mail() {
-    }
 
-    private Mail(String address, String content, String title,String userId,String userName) {
+
+    protected Mail(String address, String content, String title,String userId,String userName) {
+        super(userId,userName);
         this.address = address;
         this.content = content;
         this.title = title;
-        this.setUserId(userId);
-        this.setUserName(userName);
     }
 
     public static Mail createMail(String address, String content, String title,String userId,String userName) {
