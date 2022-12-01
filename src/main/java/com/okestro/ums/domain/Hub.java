@@ -1,11 +1,14 @@
 package com.okestro.ums.domain;
 
+import lombok.AccessLevel;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 @Entity
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Hub extends BaseEntity {
     @Id
     @GeneratedValue
@@ -13,14 +16,11 @@ public class Hub extends BaseEntity {
     private Long id;
     private String msg;
     private String title;
-    protected Hub() {
-    }
 
     protected Hub(String msg, String title, String userId, String userName) {
+        super(userId,userName);
         this.msg = msg;
         this.title = title;
-        this.setUserId(userId);
-        this.setUserName(userName);
     }
 
     public static Hub createHub(String msg, String title, String userId, String userName) {
